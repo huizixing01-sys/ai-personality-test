@@ -28,8 +28,8 @@ jobs:
       - name: Install CloudBase CLI
         run: npm install -g @cloudbase/cli
 
-      - name: Login CloudBase CLI
-        run: tcb login --apiKeyId ${{ secrets.TCB_SECRET_ID }} --apiKey ${{ secrets.TCB_SECRET_KEY }}
-
       - name: Deploy to CloudBase Static Hosting
+        env:
+          TENCENTCLOUD_SECRETID: ${{ secrets.TCB_SECRET_ID }}
+          TENCENTCLOUD_SECRETKEY: ${{ secrets.TCB_SECRET_KEY }}
         run: tcb hosting deploy ./out / -e ${{ secrets.TCB_ENV_ID }}
